@@ -117,7 +117,7 @@ const getChildrenAncestorsOrDescendants = async (documentId: string, childrenAnc
         throw Error(`param documentId must be a valid guid, received '${documentId}'`);
     }
 
-    const url = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/?sort=name:asc&fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]&fetch=${childrenAncestorOrDescendantsSpecifier}:${documentId}&skip=${skip}&take=${take}`;
+    const url = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/?fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]&fetch=${childrenAncestorOrDescendantsSpecifier}:${documentId}&skip=${skip}&take=${take}`;
 
     console.log('making request to ' + url)
 
