@@ -1,4 +1,5 @@
 import { GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
+import RenderDefaultUmbracoProperties from "../Common/render-default-umb-properties";
 
 
 const page = async ({ params }: { params: any }) => {
@@ -8,11 +9,11 @@ const page = async ({ params }: { params: any }) => {
 
     return (
         <>
-            <main className="flex min-h-screen flex-col p-24">
-                <h1 className="text-3xl mb-4">{thisPage.name}</h1>
-                <p>This page is a dynamic [...slug]</p>
+            <h1 className="text-3xl mb-4">{thisPage.name}</h1>
+            <p className='py-3'>This page is a dynamic [...slug]</p>
+            
 
-            </main>
+            <RenderDefaultUmbracoProperties umbProps={thisPage} />
         </>
     )
 }

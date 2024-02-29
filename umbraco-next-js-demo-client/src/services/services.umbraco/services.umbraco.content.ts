@@ -21,7 +21,7 @@ const UMBRACO_CONTENT_LANGUAGE = 'en-US'; // replace with your Umbraco API Key i
  * @returns A collection of content items
  */
 const getAllContentPagedAsync = async (take: number = 10, skip: number = 0, previewMode: boolean = false) => {
-    const data = await fetch(`${UMBRACO_URL}/umbraco/delivery/api/v2/content?skip=${skip}&take=${take}&fields=properties[all]`,
+    const data = await fetch(`${UMBRACO_URL}/umbraco/delivery/api/v2/content?skip=${skip}&take=${take}&fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription,relatedBlogPosts]`,
     {
         cache: cacheStrategy,
         method: 'GET',
@@ -45,7 +45,7 @@ const getAllContentPagedAsync = async (take: number = 10, skip: number = 0, prev
  * @returns A single content item
  */
 const getPageAsync = async (pagePath: string, previewMode: boolean = false) => {
-    const url:  string = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/item/${pagePath}/?fields=properties[all]`;
+    const url:  string = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/item/${pagePath}/?fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]`;
     const data = await fetch(`${url}`,
     {
         cache: cacheStrategy,
