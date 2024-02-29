@@ -1,8 +1,12 @@
+import { isValidGuid } from "@/app/Common/Helpers/guid";
 
 
 export {
     getAllContentPagedAsync as GetAllContentPagedAsync,
-    getPageAsync as GetPageAsync
+    getPageAsync as GetPageAsync,
+    getAncestorsOfDocument as GetAncestorsOfDocument,
+    getDescendantsOfDocument as GetDescendantsOfDocument,
+    getChildrenOfDocument as GetChildrenOfDocument
 }
 
 
@@ -61,4 +65,72 @@ const getPageAsync = async (pagePath: string, previewMode: boolean = false) => {
     const pageContent = await data.json();
     return pageContent;
 
+}
+
+
+
+
+/**
+ * Gets the ancestors of a document by the document's Umbraco ID
+ * @param documentId the Umbraco ID (Guid) of the queried document
+ * @param skip Used for paging, configures the number of entities to skip over
+ * @param take Used for paging, configures the max number of entities to return
+ * @returns a collection of Umbraco documents, each of which is the ancestor of the Content item
+ * @throws Error when the documentId is not a valid Guid
+ */
+const getAncestorsOfDocument = async (documentId: string, skip: number = 0, take: number = 10, previewMode: boolean = false) => {
+    return getChildrenAncestorsOrDescendants(documentId, 'ancestors', skip, take, previewMode);
+}
+
+/**
+ * Gets the Descendants of a document by the document's Umbraco ID
+ * @param documentId the Umbraco ID (Guid) of the queried document
+ * @param skip Used for paging, configures the number of entities to skip over
+ * @param take Used for paging, configures the max number of entities to return
+ * @returns a collection of Umbraco documents, each of which is the descendant of the Content item
+ * @throws Error when the documentId is not a valid Guid
+ */
+const getDescendantsOfDocument = async (documentId: string, skip: number = 0, take: number = 10, previewMode: boolean = false) => {
+    return getChildrenAncestorsOrDescendants(documentId, 'descendants', skip, take, previewMode);
+}
+
+/**
+ * Gets the Children of a document by the document's Umbraco ID
+ * @param documentId the Umbraco ID (Guid) of the queried document
+ * @param skip Used for paging, configures the number of entities to skip over
+ * @param take Used for paging, configures the max number of entities to return
+ * @returns a collection of Umbraco documents, each of which is the child of the Content item
+ * @throws Error when the documentId is not a valid Guid
+ */
+const getChildrenOfDocument = async (documentId: string, skip: number = 0, take: number = 10, previewMode: boolean = false) => {
+    return getChildrenAncestorsOrDescendants(documentId, 'children', skip, take, previewMode);
+}
+
+
+
+const getChildrenAncestorsOrDescendants = async (documentId: string, childrenAncestorOrDescendantsSpecifier: string = 'children', skip: number = 0, take: number = 10, previewMode: boolean = false) => {
+    if (childrenAncestorOrDescendantsSpecifier != 'ancestors' && childrenAncestorOrDescendantsSpecifier != 'descendants' && childrenAncestorOrDescendantsSpecifier != 'children') {
+        throw Error(`param 'childrenAncestorOrDescendantsSpecifier' must be either ancestor or descendant. Received ${childrenAncestorOrDescendantsSpecifier}`);
+    }
+    if (!isValidGuid(documentId)) {
+        throw Error(`param documentId must be a valid guid, received '${documentId}'`);
+    }
+
+    const url = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/?sort=name:asc&fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]&fetch=${childrenAncestorOrDescendantsSpecifier}:${documentId}&skip=${skip}&take=${take}`;
+
+    console.log('making request to ' + url)
+
+    const data = await fetch(`${url}`,
+    {
+        cache: cacheStrategy,
+        method: 'GET',
+        headers: {
+            'Start-Item': 'Website',
+            'Api-Key': `${UMBRACO_API_KEY}`,
+            'Accept-Language': `${UMBRACO_CONTENT_LANGUAGE}`,
+            'Preview': `${previewMode}`,
+        }
+    });
+    const umbracoDocuments = await data.json();
+    return umbracoDocuments;
 }
