@@ -7,9 +7,9 @@ const SiteMap = async () => {
 
     return (
         <>
-        <div className='py-20'>
-            <h3 className='text-xl'>Sitemap</h3>
-            <p className="mb-4">There are {sitePages.total} items in the website:</p>
+        <div className=''>
+        <h4 className='text-xl'>Sitemap</h4>
+            <p className="mb-4">There are {sitePages.total} items in the website. Click the links below to navigate</p>
 
             <div className='relative overflow-x-auto'>
                 <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

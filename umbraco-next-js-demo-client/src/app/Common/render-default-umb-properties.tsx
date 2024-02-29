@@ -2,9 +2,8 @@ const RenderDefaultUmbracoProperties = async ({ umbProps }: { umbProps: any }) =
     const str = JSON.stringify(umbProps, null, '\t');
     return (
         <>
-            <div className="w-auto border-solid border-2 border-indigo-600">
-                <p className='text-xl'>Umbraco Properties for page
-                </p>
+            <div className="w-auto">
+                <h4 className='text-xl'>Page JSON</h4>
                 <pre className='text-xs overflow-x-auto'>
                     <code>
                         {str}

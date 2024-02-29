@@ -49,6 +49,7 @@ const getAllContentPagedAsync = async (take: number = 10, skip: number = 0, prev
  * @returns A single content item
  */
 const getPageAsync = async (pagePath: string, previewMode: boolean = false) => {
+    if(pagePath == '/' || pagePath == '') { pagePath = '/home'}
     const url:  string = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/item/${pagePath}/?fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]`;
     const data = await fetch(`${url}`,
     {

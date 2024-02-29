@@ -1,15 +1,16 @@
-import { GetAllContentPagedAsync } from "@/services/services.umbraco/services.umbraco.content";
-import Link from "next/link";
+import SiteMap from "./Common/sitemap";
 
 
 
-const Home = async() => {
-  // const sitePages = await GetAllContentPagedAsync();
+const Home = async () => {
 
 
 
-  return (
-       <h1 className="text-3xl mb-4">This is the nextjs/Umbraco app</h1>
+  return (<>
+    <h1 className="text-3xl mb-4">This is the nextjs/Umbraco app</h1>
+
+    <SiteMap />
+  </>
   );
 }
 
