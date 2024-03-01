@@ -1,4 +1,4 @@
-import { GetChildrenOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
+import { GetAllContentPagedAsync, GetChildrenOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
 import RenderDefaultUmbracoProperties from "../Common/render-default-umb-properties";
 import Header from "../Common/header";
 import SiteMapComponent from "../Common/sitemap-component";
@@ -56,7 +56,7 @@ const page = async ({ params }: { params: any }) => {
                     </div>
 
                     <div>
-                    {
+                        {
                             /** 
                              * Check that `thisPageChildren.items` has items, and if so
                              * render links to them
@@ -83,10 +83,10 @@ const page = async ({ params }: { params: any }) => {
                 </div>
 
                 {
-                            /** 
-                             * Render the page's data for reference
-                             */
-                        }
+                    /** 
+                     * Render the page's data for reference
+                     */
+                }
                 <div className='col-span-2  border-solid border-2 border-indigo-600 p-2 space-y-6'>
                     <h3 className='text-xl'>Umbraco Properties for page</h3>
                     <p className=''>This page is a dynamic [...slug]/page.tsx, rendered by <code>./src/app/[...slug]/page.tsx</code></p>
@@ -110,6 +110,34 @@ const page = async ({ params }: { params: any }) => {
 export async function generateMetadata({ params }: any): Promise<Metadata> {
     return await GenerateDynamicUmbracoMetadataAsync(params.slug.join('/'));
 }
+
+/**
+ * see:
+ * https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration
+ * 
+ * 
+ * https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration
+ * @returns 
+ */
+export async function generateStaticParams(): Promise<any> {
+    // https://nextjs.org/docs/pages/api-reference/functions/get-static-paths#paths
+    const posts = await GetAllContentPagedAsync(100);
+
+    /** 
+     * The umbraco path is a full url path like:
+     *  /blog-posts/generative-artificial-intelligence-a-new-frontier-in-creativity-and-innovation
+     * We want that split up into an array of strings, which this method does
+     */
+    return posts.items.map((post: any) => ({
+        slug: post.route.path.split('/').filter(notEmpty)
+      }))
+
+
+      function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+        return value !== null && value !== undefined && value !== '';
+    }
+
+};
 
 
 export default page;

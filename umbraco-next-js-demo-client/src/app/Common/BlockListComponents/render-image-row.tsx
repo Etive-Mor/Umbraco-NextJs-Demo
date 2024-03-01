@@ -19,7 +19,7 @@ export default function RenderImageRow(content: any) {
                             height='500'
                             alt='not implemented'
                             className=''
-                            // unoptimized
+                            unoptimized
                         />
                     </div>
                     <p className='italic text-center text-sm text-slate-800'>{content.properties.caption} (click to open)</p>
