@@ -4,10 +4,19 @@ import Header from "../Common/header";
 import SiteMap from "../Common/sitemap";
 import RenderUmbracoContentRows from "../Common/render-umbraco-content-rows";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 
 const page = async ({ params }: { params: any }) => {
-    console.log('slug: ' + JSON.stringify(params.slug))
+    console.log('slug: ' + JSON.stringify(params.slug));
+
+    /** 
+     * This is a big of a hacky redirect to get around Umbraco having a
+     * content root of /website/ and a homepage of /website/home/
+     */
+    if (params.slug[0] === 'home') {
+        redirect('/');
+    }
     const thisPage = await GetPageAsync(params.slug.join('/'));
     const thisPageChildren = await GetChildrenOfDocument(thisPage.id);
 
@@ -53,7 +62,7 @@ const page = async ({ params }: { params: any }) => {
 
                 <div className='col-span-2  border-solid border-2 border-indigo-600 p-2 space-y-6'>
                     <h3 className='text-xl'>Umbraco Properties for page</h3>
-                    <p className=''>This page is a dynamic [...slug], rendered by <code>./src/app/[...slug]/page.tsx</code></p>
+                    <p className=''>This page is a non-dynamic [page.tsx], rendered by <code>./src/app/page.tsx</code></p>
                     <p className=''>This page is of type <code>{thisPage.contentType}</code></p>
                     <p className=''>This page has <code>{thisPageChildren.total}</code> child pages</p>
 

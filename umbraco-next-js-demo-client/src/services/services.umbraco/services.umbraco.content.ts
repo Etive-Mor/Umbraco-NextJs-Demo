@@ -119,7 +119,7 @@ const getChildrenAncestorsOrDescendants = async (documentId: string, childrenAnc
 
     const url = `${UMBRACO_URL}/umbraco/delivery/api/v2/content/?fields=properties[contentBlocks,metaTitle,metaKeywords,metaDescription]&fetch=${childrenAncestorOrDescendantsSpecifier}:${documentId}&skip=${skip}&take=${take}`;
 
-    console.log('making request to ' + url)
+    // console.log('making request to ' + url)
 
     const data = await fetch(`${url}`,
     {
