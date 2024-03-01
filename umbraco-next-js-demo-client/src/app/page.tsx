@@ -4,7 +4,7 @@ import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
 import RenderUmbracoContentRows from "./Common/render-umbraco-content-rows";
-import { GenerateMetadataAsync } from "./Common/Helpers/generate-metadata";
+import { GenerateMetadataAsync } from "./Common/Helpers/generate-dynamic-umbraco-metadata";
 import { Metadata } from "next";
 
 

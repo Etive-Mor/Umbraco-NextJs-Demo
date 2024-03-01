@@ -6,7 +6,7 @@ import RenderUmbracoContentRows from "../Common/render-umbraco-content-rows";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
-import { GenerateMetadataAsync } from "../Common/Helpers/generate-metadata";
+import { GenerateMetadataAsync } from "../Common/Helpers/generate-dynamic-umbraco-metadata";
 
 
 const page = async ({ params }: { params: any }) => {
