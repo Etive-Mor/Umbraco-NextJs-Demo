@@ -1,5 +1,5 @@
 import { GetDescendantsOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
-import SiteMap from "./Common/sitemap";
+import SiteMapComponent from "./Common/sitemap-component";
 import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
@@ -62,7 +62,7 @@ const Home = async () => {
         <p className=''>This page has <code>{thisPageDescendants.total}</code> child pages</p>
 
         <RenderDefaultUmbracoProperties umbProps={thisPage} />
-        <SiteMap />
+        <SiteMapComponent />
 
       </div>
     </div>

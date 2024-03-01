@@ -2,7 +2,7 @@ import { GetAllContentPagedAsync } from "@/services/services.umbraco/services.um
 import Link from "next/link";
 
 
-const SiteMap = async () => {
+const SiteMapComponent = async () => {
     const sitePages: any = await GetAllContentPagedAsync(100);
 
     return (
@@ -57,4 +57,4 @@ const SiteMap = async () => {
     )
 }
 
-export default SiteMap;
+export default SiteMapComponent;

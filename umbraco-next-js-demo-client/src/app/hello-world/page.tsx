@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 
 /**
  * Returns a simple HTML page
@@ -18,7 +19,7 @@ const HelloWorld = async () => {
  * @param param0 the page's params, which must include a property params.slug
  * @returns the page's metadata
  */
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
     const data = {
         title: 'static hello world page',
         description: 'this is a static metadata description',

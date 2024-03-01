@@ -2,8 +2,6 @@
 
 ## Run the apps
 
-
-
 ### Run the Umbraco application 
 `dotnet run --project "UmbracoNextJsDemo.Site"` 
 
@@ -15,6 +13,6 @@
 
 ### Run the NextJS frontend application
 
-- The umbraco site must be running before the next.js client will build
+- The umbraco site must be running before the next.js client can build
 
 `npm run dev --prefix .\umbraco-next-js-demo-client\`

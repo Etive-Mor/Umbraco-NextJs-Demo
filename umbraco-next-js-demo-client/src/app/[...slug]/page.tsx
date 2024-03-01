@@ -1,7 +1,7 @@
 import { GetChildrenOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
 import RenderDefaultUmbracoProperties from "../Common/render-default-umb-properties";
 import Header from "../Common/header";
-import SiteMap from "../Common/sitemap";
+import SiteMapComponent from "../Common/sitemap-component";
 import RenderUmbracoBlocklistRow from "../Common/render-umbraco-blocklist-row";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -94,7 +94,7 @@ const page = async ({ params }: { params: any }) => {
                     <p className=''>This page has <code>{thisPageChildren.total}</code> child pages</p>
 
                     <RenderDefaultUmbracoProperties umbProps={thisPage} />
-                    <SiteMap />
+                    <SiteMapComponent />
 
                 </div>
             </div>
