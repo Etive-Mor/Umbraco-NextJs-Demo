@@ -2,6 +2,8 @@
 
 An Umbraco backoffice with a next.js front-end. Demo is available here: https://etive-mor.github.io/umbraco-nextjs-demo/
 
+Learn how to build this app here: https://www.etive-mor.com/blog/umbraco-and-nextjs-part-1-installing-the-applications
+
 ## Run the apps
 
 ### Run the Umbraco application 
