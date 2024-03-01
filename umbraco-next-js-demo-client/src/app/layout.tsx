@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,9 @@ export default function RootLayout({
         <main className="flex min-h-screen flex-col p-24 max-w-screen-2xl">
           {children}
         </main>
+        <footer>
+          This site was created by Etive Mor <Link href='https://www.etive-mor.com/'></Link>
+        </footer>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/umbraco-nextjs-demo',
     output: "export",
     images: {
         remotePatterns: [
