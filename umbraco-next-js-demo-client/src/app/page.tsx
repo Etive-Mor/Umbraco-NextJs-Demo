@@ -3,7 +3,7 @@ import SiteMap from "./Common/sitemap";
 import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
-import RenderUmbracoBlocklistRow from "./Common/render-umbraco-content-rows";
+import RenderUmbracoBlocklistRow from "./Common/render-umbraco-blocklist-row";
 import { GenerateMetadataAsync } from "./Common/Helpers/generate-dynamic-umbraco-metadata";
 import { Metadata } from "next";
 

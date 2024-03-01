@@ -2,7 +2,7 @@ import { GetChildrenOfDocumentAsync, GetPageAsync } from "@/services/services.um
 import RenderDefaultUmbracoProperties from "../Common/render-default-umb-properties";
 import Header from "../Common/header";
 import SiteMap from "../Common/sitemap";
-import RenderUmbracoBlocklistRow from "../Common/render-umbraco-content-rows";
+import RenderUmbracoBlocklistRow from "../Common/render-umbraco-blocklist-row";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
