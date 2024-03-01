@@ -7,13 +7,13 @@ import { Metadata } from "next";
  * @param pageSlug the slug for this page, which will be used to query Umbraco
  * @returns the page's metadata
  */
-export async function GenerateMetadataAsync(pageSlug: string): Promise<Metadata> {
+export async function GenerateDynamicUmbracoMetadataAsync(pageSlug: string): Promise<Metadata> {
 
     const thisPage = await GetPageAsync(pageSlug);
 
     const data = {
-        title: thisPage.properties.metaTitle,
-        description: thisPage.properties.metaDescription,
+        title: thisPage?.properties?.metaTitle,
+        description: thisPage?.properties?.metaDescription,
     }
     return data;
 }

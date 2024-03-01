@@ -4,7 +4,7 @@ import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
 import RenderUmbracoBlocklistRow from "./Common/render-umbraco-blocklist-row";
-import { GenerateMetadataAsync } from "./Common/Helpers/generate-dynamic-umbraco-metadata";
+import { GenerateDynamicUmbracoMetadataAsync } from "./Common/Helpers/generate-dynamic-umbraco-metadata";
 import { Metadata } from "next";
 
 
@@ -76,7 +76,7 @@ const Home = async () => {
  * @returns 
  */
 export async function generateMetadata(): Promise<Metadata> {
-  return await GenerateMetadataAsync('/home');
+  return await GenerateDynamicUmbracoMetadataAsync('/home');
 }
 
 

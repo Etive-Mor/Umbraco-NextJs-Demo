@@ -27,7 +27,7 @@ const SiteMap = async () => {
                                 </Link>
                             </td>
                             <td className="px-6 py-4">
-                                <Link href='hello-world' >
+                                <Link href='/hello-world/' >
                                     Hello World (non umbraco page)
                                 </Link>
                             </td>

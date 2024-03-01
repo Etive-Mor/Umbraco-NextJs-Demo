@@ -1,5 +1,6 @@
 import RenderRichTextRow from "./BlockListComponents/render-rich-text-row";
 import RenderImageRow from "./BlockListComponents/render-image-row";
+import { GenerateDynamicUmbracoMetadataAsync } from "./Helpers/generate-dynamic-umbraco-metadata";
 
 
 export interface UmbracoBlocklistRowItem {
@@ -34,3 +35,4 @@ export default function RenderUmbracoBlocklistRow({ content, settings }: Umbraco
     </>
     )
 }
+

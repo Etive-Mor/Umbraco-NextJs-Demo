@@ -6,7 +6,7 @@ import RenderUmbracoBlocklistRow from "../Common/render-umbraco-blocklist-row";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
-import { GenerateMetadataAsync } from "../Common/Helpers/generate-dynamic-umbraco-metadata";
+import { GenerateDynamicUmbracoMetadataAsync } from "../Common/Helpers/generate-dynamic-umbraco-metadata";
 
 
 const page = async ({ params }: { params: any }) => {
@@ -108,7 +108,7 @@ const page = async ({ params }: { params: any }) => {
  * @returns the page's metadata
  */
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-    return await GenerateMetadataAsync(params.slug.join('/'));
+    return await GenerateDynamicUmbracoMetadataAsync(params.slug.join('/'));
 }
 
 
