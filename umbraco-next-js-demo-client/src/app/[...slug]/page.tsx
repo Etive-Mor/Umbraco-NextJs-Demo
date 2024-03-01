@@ -1,8 +1,8 @@
-import { GetChildrenOfDocument, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
+import { GetChildrenOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
 import RenderDefaultUmbracoProperties from "../Common/render-default-umb-properties";
 import Header from "../Common/header";
 import SiteMap from "../Common/sitemap";
-import RenderUmbracoContentRows from "../Common/render-umbraco-content-rows";
+import RenderUmbracoBlocklistRow from "../Common/render-umbraco-content-rows";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
@@ -10,7 +10,6 @@ import { GenerateMetadataAsync } from "../Common/Helpers/generate-dynamic-umbrac
 
 
 const page = async ({ params }: { params: any }) => {
-    console.log('slug: ' + JSON.stringify(params.slug));
 
     /** 
      * This is a big of a hacky redirect to get around Umbraco having a
@@ -19,22 +18,37 @@ const page = async ({ params }: { params: any }) => {
     if (params.slug[0] === 'home') {
         redirect('/');
     }
+
+    /**
+     * Get the page data, and child pages
+     */
     const thisPage = await GetPageAsync(params.slug.join('/'));
-    const thisPageChildren = await GetChildrenOfDocument(thisPage.id);
+    const thisPageChildren = await GetChildrenOfDocumentAsync(thisPage.id);
 
     return (
         <>
             <div className='grid grid-cols-6 gap-4'>
                 <div className='col-span-6 pb-12'>
+                    {
+                        /** 
+                         * Render the site's header with a common component
+                         */
+                    }
                     <Header thisPage={thisPage} />
                 </div>
                 <div className='col-span-4'>
                     <div className="max-w-prose">
+                        {
+                            /** 
+                             * Check that `thisPage.properties.contentBlocks` has content, and if so
+                             * render the ContentRows using a common component
+                             */
+                        }
                         {thisPage.properties.contentBlocks && (
                             <section className="">
                                 {thisPage.properties.contentBlocks.items.map((contentRow: any) => (
                                     <section key={contentRow.content.id} className="gap-7 mb-6 space-y-6">
-                                        <RenderUmbracoContentRows content={contentRow.content} settings={contentRow.settings} />
+                                        <RenderUmbracoBlocklistRow content={contentRow.content} settings={contentRow.settings} />
                                     </section>
                                 ))}
                             </section>
@@ -42,6 +56,12 @@ const page = async ({ params }: { params: any }) => {
                     </div>
 
                     <div>
+                    {
+                            /** 
+                             * Check that `thisPageChildren.items` has items, and if so
+                             * render links to them
+                             */
+                        }
                         {thisPageChildren.items && (
                             <>
                                 <ol className='grid grid-cols-2 gap-4'>
@@ -62,9 +82,14 @@ const page = async ({ params }: { params: any }) => {
                     </div>
                 </div>
 
+                {
+                            /** 
+                             * Render the page's data for reference
+                             */
+                        }
                 <div className='col-span-2  border-solid border-2 border-indigo-600 p-2 space-y-6'>
                     <h3 className='text-xl'>Umbraco Properties for page</h3>
-                    <p className=''>This page is a non-dynamic [page.tsx], rendered by <code>./src/app/page.tsx</code></p>
+                    <p className=''>This page is a dynamic [...slug]/page.tsx, rendered by <code>./src/app/[...slug]/page.tsx</code></p>
                     <p className=''>This page is of type <code>{thisPage.contentType}</code></p>
                     <p className=''>This page has <code>{thisPageChildren.total}</code> child pages</p>
 
@@ -83,7 +108,7 @@ const page = async ({ params }: { params: any }) => {
  * @returns the page's metadata
  */
 export async function generateMetadata({ params }: any): Promise<Metadata> {
-    return await GenerateMetadataAsync( params.slug.join('/') );
+    return await GenerateMetadataAsync(params.slug.join('/'));
 }
 
 

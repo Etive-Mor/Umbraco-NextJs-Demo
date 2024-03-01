@@ -1,9 +1,9 @@
-import { GetDescendantsOfDocument, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
+import { GetDescendantsOfDocumentAsync, GetPageAsync } from "@/services/services.umbraco/services.umbraco.content";
 import SiteMap from "./Common/sitemap";
 import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
-import RenderUmbracoContentRows from "./Common/render-umbraco-content-rows";
+import RenderUmbracoBlocklistRow from "./Common/render-umbraco-content-rows";
 import { GenerateMetadataAsync } from "./Common/Helpers/generate-dynamic-umbraco-metadata";
 import { Metadata } from "next";
 
@@ -12,7 +12,7 @@ import { Metadata } from "next";
 const Home = async () => {
   const thisPage = await GetPageAsync('/');
 
-  const thisPageDescendants = await GetDescendantsOfDocument('c59a3527-d045-4ef3-826b-e969aeb4245f');
+  const thisPageDescendants = await GetDescendantsOfDocumentAsync('c59a3527-d045-4ef3-826b-e969aeb4245f');
 
 
   return (<>
@@ -27,7 +27,7 @@ const Home = async () => {
             <section className="">
               {thisPage.properties.contentBlocks.items.map((contentRow: any) => (
                 <section key={contentRow.content.id} className="gap-7 mb-6 space-y-6">
-                  <RenderUmbracoContentRows content={contentRow.content} settings={contentRow.settings} />
+                  <RenderUmbracoBlocklistRow content={contentRow.content} settings={contentRow.settings} />
                 </section>
               ))}
             </section>

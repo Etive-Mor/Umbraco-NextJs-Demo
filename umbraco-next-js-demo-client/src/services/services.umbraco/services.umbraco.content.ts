@@ -4,13 +4,13 @@ import { isValidGuid } from "@/app/Common/Helpers/guid";
 export {
     getAllContentPagedAsync as GetAllContentPagedAsync,
     getPageAsync as GetPageAsync,
-    getAncestorsOfDocument as GetAncestorsOfDocument,
-    getDescendantsOfDocument as GetDescendantsOfDocument,
-    getChildrenOfDocument as GetChildrenOfDocument
+    getAncestorsOfDocument as GetAncestorsOfDocumentAsync,
+    getDescendantsOfDocument as GetDescendantsOfDocumentAsync,
+    getChildrenOfDocument as GetChildrenOfDocumentAsync
 }
 
 
-const cacheStrategy = 'force-cache'; // 'force-cache' or 'no-store'
+const cacheStrategy = 'force-cache'; // 'force-cache' or 'no-store' https://nextjs.org/docs/app/api-reference/functions/fetch#optionscache
 const UMBRACO_URL = 'http://localhost:59970'; // replace with your Umbraco URL
 const UMBRACO_API_KEY = 'your-api-key'; // replace with your Umbraco API Key if you're using the protected endpoint model
 const UMBRACO_CONTENT_LANGUAGE = 'en-US'; // replace with your Umbraco API Key if you're using the protected endpoint model

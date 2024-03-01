@@ -2,13 +2,13 @@ import Link from "next/link";
 import Image from 'next/image';
 
 
-export interface UmbracoContentRowItem {
+export interface UmbracoBlocklistRowItem {
     content: any
     settings: any
 }
 
 
-export default function RenderUmbracoContentRows({ content, settings }: UmbracoContentRowItem) {
+export default function RenderUmbracoBlocklistRow({ content, settings }: UmbracoBlocklistRowItem) {
 
     /** 
      * If the block is configured as hidden, do not render it
