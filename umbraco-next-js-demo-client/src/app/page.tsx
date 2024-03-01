@@ -4,6 +4,8 @@ import Link from "next/link";
 import RenderDefaultUmbracoProperties from "./Common/render-default-umb-properties";
 import Header from "./Common/header";
 import RenderUmbracoContentRows from "./Common/render-umbraco-content-rows";
+import { GenerateMetadataAsync } from "./Common/Helpers/generate-metadata";
+import { Metadata } from "next";
 
 
 
@@ -68,6 +70,14 @@ const Home = async () => {
   );
 }
 
+/**
+ * Generates the page's metadata
+ * @param param0 
+ * @returns 
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  return await GenerateMetadataAsync('/home');
+}
 
 
 export default Home;

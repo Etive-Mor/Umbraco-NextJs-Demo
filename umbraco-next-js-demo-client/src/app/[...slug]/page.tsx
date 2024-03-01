@@ -5,6 +5,8 @@ import SiteMap from "../Common/sitemap";
 import RenderUmbracoContentRows from "../Common/render-umbraco-content-rows";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+import { GenerateMetadataAsync } from "../Common/Helpers/generate-metadata";
 
 
 const page = async ({ params }: { params: any }) => {
@@ -74,5 +76,15 @@ const page = async ({ params }: { params: any }) => {
         </>
     )
 }
+
+/**
+ * Generates the page's metadata
+ * @param param0 the page's params, which must include a property params.slug
+ * @returns the page's metadata
+ */
+export async function generateMetadata({ params }: any): Promise<Metadata> {
+    return await GenerateMetadataAsync( params.slug.join('/') );
+}
+
 
 export default page;
