@@ -1,4 +1,4 @@
-# Umbraco NextJs Static Site Generator Demo
+# Umbraco next.js Static Site Generator Demo
 
 An Umbraco backoffice with a next.js front-end. Demo is available here: https://etive-mor.github.io/umbraco-nextjs-demo/
 
